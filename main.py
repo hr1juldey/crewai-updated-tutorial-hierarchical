@@ -4,6 +4,7 @@ from agents import AINewsLetterAgents
 from tasks import AINewsLetterTasks
 from file_io import save_markdown
 import os
+from pydantic import BaseModel
 from dotenv import load_dotenv
 load_dotenv()
 os.environ["OPENAI_API_KEY"] = "NA"
@@ -13,7 +14,7 @@ tasks = AINewsLetterTasks()
 
 # Initialize the OpenAI GPT-4 language model
 OpenAIGPT4 = ChatOpenAI(
-    model = "llama3-groq-tool-use:latest",
+    model = "phi3:medium", #llama3-groq-tool-use:latest #arcee-ai/arcee-agent:latest
     base_url = "http://localhost:11434/v1"
     )
 
@@ -42,9 +43,8 @@ crew = Crew(
 )
 
 # Kick off the crew's work
-results = str(crew.kickoff())
+results = crew.kickoff()
 
 # Print the results
 print("Crew Work Results:")
 print(results)
-save_markdown(results)
