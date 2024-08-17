@@ -23,6 +23,7 @@ class AINewsLetterAgents():
             tools=[SearchTools.search_internet],
             verbose=True,
             allow_delegation=True,
+            max_retry_limit=20
         )
 
     def news_analyzer_agent(self):
@@ -34,6 +35,7 @@ class AINewsLetterAgents():
             tools=[SearchTools.search_internet],
             verbose=True,
             allow_delegation=True,
+            max_retry_limit=20
         )
 
     def newsletter_compiler_agent(self):
@@ -44,4 +46,5 @@ class AINewsLetterAgents():
             ensuring a coherent and visually appealing presentation that captivates our readers. Make sure to follow
             newsletter format guidelines and maintain consistency throughout.""",
             verbose=True,
+            max_retry_limit=20
         )

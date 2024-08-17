@@ -4,7 +4,7 @@ from agents import AINewsLetterAgents
 from tasks import AINewsLetterTasks
 from file_io import save_markdown
 import os
-from pydantic import BaseModel
+#from pydantic import BaseModel
 from dotenv import load_dotenv
 load_dotenv()
 os.environ["OPENAI_API_KEY"] = "NA"
@@ -42,10 +42,11 @@ crew = Crew(
     verbose=True
 )
 
-# Kick off the crew's work
-results = crew.kickoff()
+while True:
+    # Kick off the crew's work
+ results = crew.kickoff()
 
-# Print the results
-print("Crew Work Results:")
-print(results)
-save_markdown # type: ignore 
+    # Print the results
+ print("Crew Work Results:")
+ print(str(results))
+ save_markdown(results) # type: ignore 

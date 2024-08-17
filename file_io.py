@@ -30,7 +30,7 @@ def save_markdown(task_output):
     
     # Write the task output to the markdown file
     with open(filename, 'w') as file:
-        file.write(task_output.result)
+        file.write(task_output.results)
     
     print(f"Newsletter saved as {filename}")
 
