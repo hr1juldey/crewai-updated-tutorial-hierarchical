@@ -13,7 +13,7 @@ tasks = AINewsLetterTasks()
 
 # Initialize the OpenAI GPT-4 language model
 OpenAIGPT4 = ChatOpenAI(
-    model = "crewai-llama3.1:latest",
+    model = "llama3-groq-tool-use:latest",
     base_url = "http://localhost:11434/v1"
     )
 
@@ -28,21 +28,23 @@ newsletter_compiler = agents.newsletter_compiler_agent()
 # Instantiate the tasks
 fetch_news_task = tasks.fetch_news_task(news_fetcher)
 analyze_news_task = tasks.analyze_news_task(news_analyzer, [fetch_news_task])
-compile_newsletter_task = tasks.compile_newsletter_task(
-    newsletter_compiler, [analyze_news_task], save_markdown)
+compile_newsletter_task = tasks.compile_newsletter_task(newsletter_compiler, [analyze_news_task], save_markdown)
 
 # Form the crew
 crew = Crew(
     agents=[editor, news_fetcher, news_analyzer, newsletter_compiler],
     tasks=[fetch_news_task, analyze_news_task, compile_newsletter_task],
     process=Process.hierarchical,
+    planning=True,
+    planning_llm=OpenAIGPT4,
     manager_llm=OpenAIGPT4,
-    verbose=2
+    verbose=True
 )
 
 # Kick off the crew's work
-results = crew.kickoff()
+results = str(crew.kickoff())
 
 # Print the results
 print("Crew Work Results:")
 print(results)
+save_markdown(results)
