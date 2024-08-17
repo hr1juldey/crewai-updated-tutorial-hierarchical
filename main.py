@@ -14,7 +14,7 @@ tasks = AINewsLetterTasks()
 
 # Initialize the OpenAI GPT-4 language model
 OpenAIGPT4 = ChatOpenAI(
-    model = "phi3:medium", #llama3-groq-tool-use:latest #arcee-ai/arcee-agent:latest phi3:medium
+    model = "llama3-groq-tool-use:latest", #llama3-groq-tool-use:latest #arcee-ai/arcee-agent:latest phi3:medium
     base_url = "http://localhost:11434/v1"
     )
 
