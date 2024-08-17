@@ -3,17 +3,19 @@ from langchain_openai import ChatOpenAI
 from agents import AINewsLetterAgents
 from tasks import AINewsLetterTasks
 from file_io import save_markdown
-
+import os
 from dotenv import load_dotenv
 load_dotenv()
+
+#
 
 # Initialize the agents and tasks
 agents = AINewsLetterAgents()
 tasks = AINewsLetterTasks()
 
-# Initialize the OpenAI GPT-4 language model
+# Initialize the  language model
 OpenAIGPT4 = ChatOpenAI(
-    model="gpt-4"
+    model="crewai-llama3.1:latest"
 )
 
 
@@ -35,7 +37,7 @@ crew = Crew(
     tasks=[fetch_news_task, analyze_news_task, compile_newsletter_task],
     process=Process.hierarchical,
     manager_llm=OpenAIGPT4,
-    verbose=2
+    verbose=True
 )
 
 # Kick off the crew's work
