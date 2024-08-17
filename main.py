@@ -14,7 +14,7 @@ tasks = AINewsLetterTasks()
 
 # Initialize the OpenAI GPT-4 language model
 OpenAIGPT4 = ChatOpenAI(
-    model = "phi3:medium", #llama3-groq-tool-use:latest #arcee-ai/arcee-agent:latest
+    model = "arcee-ai/arcee-agent:latest", #llama3-groq-tool-use:latest #arcee-ai/arcee-agent:latest phi3:medium
     base_url = "http://localhost:11434/v1"
     )
 
@@ -36,8 +36,8 @@ crew = Crew(
     agents=[editor, news_fetcher, news_analyzer, newsletter_compiler],
     tasks=[fetch_news_task, analyze_news_task, compile_newsletter_task],
     process=Process.hierarchical,
-    planning=True,
-    planning_llm=OpenAIGPT4,
+    #planning=True,
+    #planning_llm=OpenAIGPT4,
     manager_llm=OpenAIGPT4,
     verbose=True
 )
