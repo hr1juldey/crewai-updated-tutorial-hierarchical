@@ -6,17 +6,17 @@ from file_io import save_markdown
 import os
 from dotenv import load_dotenv
 load_dotenv()
-
-#
-
+os.environ["OPENAI_API_KEY"] = "NA"
 # Initialize the agents and tasks
 agents = AINewsLetterAgents()
 tasks = AINewsLetterTasks()
 
-# Initialize the  language model
+# Initialize the OpenAI GPT-4 language model
 OpenAIGPT4 = ChatOpenAI(
-    model="crewai-llama3.1:latest"
-)
+    model = "crewai-llama3.1:latest",
+    base_url = "http://localhost:11434/v1"
+    )
+
 
 
 # Instantiate the agents
@@ -37,7 +37,7 @@ crew = Crew(
     tasks=[fetch_news_task, analyze_news_task, compile_newsletter_task],
     process=Process.hierarchical,
     manager_llm=OpenAIGPT4,
-    verbose=True
+    verbose=2
 )
 
 # Kick off the crew's work
