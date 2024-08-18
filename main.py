@@ -14,7 +14,7 @@ tasks = AINewsLetterTasks()
 
 # Initialize the OpenAI GPT-4 language model
 OpenAIGPT4 = ChatOpenAI(
-    model = "phi3:medium", #llama3-groq-tool-use:latest #arcee-ai/arcee-agent:latest phi3:medium
+    model = "crewai-llama3.1:latest", #llama3-groq-tool-use:latest #arcee-ai/arcee-agent:latest phi3:medium crewai-llama3.1:latest
     base_url = "http://localhost:11434/v1"
     )
 
@@ -44,9 +44,9 @@ crew = Crew(
 
 while True:
     # Kick off the crew's work
- results = crew.kickoff()
+ result = crew.kickoff()
 
     # Print the results
  print("Crew Work Results:")
- print(str(results))
- save_markdown(results) # type: ignore 
+ print(str(result))
+ save_markdown # type: ignore 
